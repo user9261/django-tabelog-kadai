@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Restaurant,Category
+from .models import Restaurant,Category,Subscription
 from django.utils.safestring import mark_safe
 
 class RestaurantAdmin(admin.ModelAdmin):
@@ -15,5 +15,10 @@ class CategoryAdmin(admin.ModelAdmin):
      list_display = ('id', 'name')
      search_fields = ('name',)
 
+class SubscriptionAdmin(admin.ModelAdmin):
+     list_display = ('id', 'stripe_subscription_id', 'stripe_customer_id',)
+     search_fields = ('stripe_subscription_id',)
+
 admin.site.register(Restaurant, RestaurantAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Subscription, SubscriptionAdmin)

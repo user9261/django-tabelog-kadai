@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Payment Form{% endblock %}
+
+{% block content %}
+<h2>Payment Form</h2>
+<form id="payment-form" method="post" action="{% url 'create_subscription' %}">
+    {% csrf_token %}
+    <div id="card-element">
+        <!-- StripeのカードElementがここに挿入されます -->
+    </div>
+    <button type="submit" id="submit-button">Submit Payment</button>
+    <div id="card-errors" role="alert"></div>
+</form>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+var stripe = Stripe('{{ stripe_public_key }}');
+var elements = stripe.elements();
+var style = {
+    base: {
+        color: '#32325d',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSmoothing: 'antialiased',
+        fontSize: '16px',
+        '::placeholder': {
+            color: '#aab7c4'
+        }
+    },
+    invalid: {
+        color: '#fa755a',
+        iconColor: '#fa755a'
+    }
+};
+
+var card = elements.create('card', {style: style});
+card.mount('#card-element');
+
+card.addEventListener('change', function(event) {
+    var displayError = document.getElementById('card-errors');
+    if (event.error) {
+        displayError.textContent = event.error.message;
+    } else {
+        displayError.textContent = '';
+    }
+});
+
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    stripe.createToken(card).then(function(result) {
+        if (result.error) {
+            var errorElement = document.getElementById('card-errors');
+            errorElement.textContent = result.error.message;
+        } else {
+            // トークンをサーバーに送信
+            stripeTokenHandler(result.token);
+        }
+    });
+});
+
+function stripeTokenHandler(token) {
+    var form = document.getElementById('payment-form');
+    var hiddenInput = document.createElement('input');
+    hiddenInput.setAttribute('type', 'hidden');
+    hiddenInput.setAttribute('name', 'stripeToken');
+    hiddenInput.setAttribute('value', token.id);
+    form.appendChild(hiddenInput);
+
+    // フォームのサブミットを再開
+    form.submit();
+}
+</script>
+{% endblock %}
+
+
