@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+ <html lang="ja">
+ <head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>商品一覧</title>
+ </head>
+ <body>
+     <h1>店舗一覧</h1>
+     <table border="1">
+         <thead>
+             <tr>
+                 <th>商品名</th>
+                 <th>営業時間</th>
+                 <th>郵便番号</th>
+                 <th>住所</th>
+                 <th>電話番号</th>
+                 <th>最安価格</th>
+                 <th>最高価格</th>
+                 <th>カテゴリー</th>
+                 <th>画像</th>
+                 <th>アクション</th>
+
+
+             </tr>
+         </thead>
+         {% for Restaurant in object_list %}
+      <tr>
+          <td>{{ Restaurant.name }}</td>
+          <td>{{ Restaurant.business_hours }} </td>
+          <td>{{ Restaurant.zip_code }} </td>
+          <td>{{ Restaurant.address }} </td>
+          <td>{{ Restaurant.phone_number }} </td>
+          <td>{{ Restaurant.min_price }} </td>
+          <td>{{ Restaurant.max_price }} </td>
+          <td>{{ Restaurant.category }} </td>
+          <td><img src="{{ Restaurant.img.url }}" style="width:100px heigth:auto;"></td>   
+          <td>
+            
+            
+          
+
+       </tr>
+         {% endfor %}
+     </table>
+     
+     {# ページの表示 #}
+     {{ page_obj.number }} / {{ page_obj.paginator.num_pages }} ページ<br>
+ 
+     {# 前へ #}
+     {% if page_obj.has_previous %}
+     <a href="?page=1">&laquo; 先頭</a>
+     <a href="?page={{ page_obj.previous_page_number }}">前へ</a>
+     {% endif %}
+ 
+     {# 次へ #}
+     {% if page_obj.has_next %}
+     <a href="?page={{ page_obj.next_page_number }}">次へ</a>
+     <a href="?page={{ page_obj.paginator.num_pages }}">最後 &raquo;</a>
+     {% endif %}
+ </body>
+ </html>

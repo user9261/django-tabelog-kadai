@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView
+from .models import Restaurant
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponseRedirect
 
 from django.shortcuts import redirect
 from django.contrib import messages
@@ -29,8 +31,17 @@ class TopView(TemplateView):
           else:
                context['has_subscription'] = False
           return context
+     
+     
+class RestaurantListView(ListView):
+     model = Restaurant
+     template_name = "top.html"
+     paginate_by = 3     
 
-
+class RestaurantDetailView(DetailView):
+    model = Restaurant 
+    context_object_name = "Restaurant_detail"
+    template_name = "crud/Restaurant_detail.html"
 
 
       
@@ -80,3 +91,22 @@ class CreateSubscriptionView(View):
             print(f'Error creating subscription: {str(e)}')
             messages.error(request, f'Error creating subscription: {str(e)}')
             return redirect('top')
+
+class CustomerPortalView(LoginRequiredMixin, View):
+    def get(self, request, *args, **kwargs):
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+        # Stripeの顧客IDを取得（実際にはユーザーモデル等から取得する）
+        user = request.user,
+        customer_id = Subscription.objects.get(user=user).stripe_customer_id
+
+        # 顧客ポータルセッションの作成
+        session = stripe.billing_portal.Session.create(
+            customer=customer_id,
+            return_url="http://127.0.0.1:8000/",
+        )
+
+        # 顧客ポータルのURLへリダイレクト
+        return HttpResponseRedirect(session.url)
+

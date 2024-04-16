@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crud',
     'bootstrapform',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -133,5 +134,9 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'top'
 LOGOUT_REDIRECT_URL = 'top'
 
+
 STRIPE_PUBLIC_KEY ='pk_test_51P5In4GbmPUm5RpaBUxXwjhN3d9lQNHLt53vFeQnQ62sVW0MPCSq9kmAg71VEIogpAq4Khn9kXI1jmG8vmd4a33n00KC4GTGsP'
 STRIPE_SECRET_KEY ='sk_test_51P5In4GbmPUm5RpauNIROogaGhgNyjT5GlXmjng7PybhhHIvFUMwiWtO4XpFfAX8cJnFjclluF1jcLGWeoa7zWqE003xBaNMEa'
+
+
+AUTH_USER_MODEL = "accounts.User"

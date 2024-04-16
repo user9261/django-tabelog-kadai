@@ -24,14 +24,14 @@ class Restaurant(models.Model):
     
      # 新規作成・編集完了時のリダイレクト先
      def get_absolute_url(self):
-        return reverse('list')
+        return reverse('top')
      
-     class Subscription(models.Model):
-       user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription')
-       stripe_subscription_id = models.CharField(max_length=255, blank=True)
-       stripe_customer_id = models.CharField(max_length=255, blank=True)
-       created_at = models.DateTimeField(auto_now_add=True)
-       updated_at = models.DateTimeField(auto_now=True)
+class Subscription(models.Model):
+      user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='subscription')
+      stripe_subscription_id = models.CharField(max_length=255, blank=True)
+      stripe_customer_id = models.CharField(max_length=255, blank=True)
+      created_at = models.DateTimeField(auto_now_add=True)
+      updated_at = models.DateTimeField(auto_now=True)
 
-       def __str__(self):
-        return f"{self.user.username}'s Subscription"
+      def __str__(self):
+         return f"{self.user.username}'s Subscription"
