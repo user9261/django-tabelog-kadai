@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.TopView.as_view(), name="top"),
-    path('top/', views.RestaurantListView.as_view(), name="list"),
+    path('crud/', views.RestaurantListView.as_view(), name="list"),
     path('account', views.TopView.as_view(), name="account"),
     path('login/', views.LoginView.as_view(), name="login"),
     path('logout/', views.LogoutView.as_view(), name="logout"),
@@ -31,7 +31,7 @@ urlpatterns = [
     path('create-subscription/', views.CreateSubscriptionView.as_view(), name='create_subscription'),
     path('billing-portal/', views.CustomerPortalView.as_view(), name='billing-portal'),
     path('crud/detail/<int:pk>', views.RestaurantDetailView.as_view(), name="detail"),
-
+   
 
 ]
 

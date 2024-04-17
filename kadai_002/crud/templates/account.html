@@ -3,48 +3,77 @@
  
  {% block title %}アカウント作成画面{% endblock %}
  {% block content %}
- <h1>会員登録</h1>
+ <h1 style="text-align:center">会員登録</h1>
+ <div style="width: 400px; margin: auto;">
  <form method="post" action="test.html">
-  <table width="1000" border="0">
+  <table style="font-size: 18px;" width="400" border="0">
      <tr>
 　     <th>名前</th>
-       <th><input type="text" maxlength="100" placeholder="山田太郎" id="name">
+       <th><input type="text" size ="28" maxlength="100" placeholder="山田太郎" id="name">
      </tr>
      <tr>
        <th>名前(ふりがな)</th>
-       <th><input type="text" maxlength="200" placeholder="やまだたろう" id="name_huri"></th>
+       <th><input type="text" size ="28" maxlength="200" placeholder="やまだたろう" id="name_huri"></th>
      </tr>
      <tr>
        <th>メールアドレス</th>
-       <th><input type="text" maxlength="254" placeholder="aaaa@gmail.com" id="mail"></th>
+       <th><input type="text" size ="28" maxlength="254" placeholder="aaaa@gmail.com" id="mail"></th>
      </tr>
       <tr>
        <th>パスワード</th>
-       <th><input type="password" maxlength="20" placeholder="半角英数8文字以上" id="pass"></th>
+       <th><input type="password"size ="28" maxlength="20" placeholder="半角英数8文字以上" id="pass"></th>
      </tr>
      <tr>
         <th>パスワード再入力</th>
-        <th><input type="password" maxlength="20" placeholder="半角英数8文字以上" id="repass"></th>
+        <th><input type="password" size ="28"maxlength="20" placeholder="半角英数8文字以上" id="repass"></th>
      </tr>
      <tr>
         <th>郵便番号</th>
-        <th><input type="text" maxlength="7" placeholder="ハイフンなし" id="yuubin"></th>
+        <th><input type="text" size ="28" maxlength="7" placeholder="ハイフンなし" id="yuubin"></th>
      </tr>
      <tr>
         <th>住所</th>
-        <th><input type="text" maxlength="200" id="address"></th>
+        <th><input type="text"size ="28" maxlength="200" id="address"></th>
      </tr>
      <tr>
         <th>電話番号</th>
-        <th><input type="text" maxlength="21" placeholder="ハイフンなし" id="phone"></th>
+        <th><input type="text" size ="28" maxlength="21" placeholder="ハイフンなし" id="phone"></th>
       </tr>
       <tr>
         <th>生年月日</th>
         <th><input type="date" name="calendar" max="9999-12-31" id="birth"></th>
       </tr>
   </table>
-  <br/>
-  <input type="submit" value="会員登録" id="touroku">
+</div>
+<br>
+  
+  <div style = "text-align: center;">
+  <input class="hoge_button"　type="submit" value="会員登録" id="touroku">
+</div>
+ 
+
+<style>
+   .hoge_button{
+            text-align: center;
+            font-size: 18px;                     
+            padding: 10px 0px;
+            border-radius: 25px;
+            text-decoration: none;
+            color: #FFF;
+            background-image: linear-gradient(45deg, #16d3ba 0%, #23b4e0e8 100%);
+            transition: .4s;
+            border:none
+            }
+    
+            
+  
+    
+
+  
+</style>
+
   </form>
+
+  <br>
 
  {% endblock %}

@@ -4,47 +4,101 @@
 {% block title %}商品詳細{% endblock %}
 {% block content %}
 <h1>店舗詳細</h1>
+<div style="text-align: center">
+    <h2>{{ Restaurant_detail.name }}</h2>
+</div>
+
+
 <table class="table table-striped table-hover table-bordered">
-  
+    <div style="text-align: center">
+    <img src="{{ Restaurant_detail.img.url }}" style="width:600px;,height:300px;">
+
+   </div>
+
+
     <table border="1">
-        <thead>
-            <tr>
-                <th>画像</th>
-                <th>店舗名</th>
-                <th>営業時間</th>
-                <th>郵便番号</th>
-                <th>住所</th>
-                <th>電話番号</th>
-                <th>最安価格</th>
-                <th>最高価格</th>
-                <th>カテゴリー</th>
+      
+            
+            <tr><th>営業時間</th><td>{{ Restaurant_detail.business_hours }} </td>    
+            <tr><th>郵便番号</th><td>{{ Restaurant_detail.zip_code }}</td>    
+            <tr><th>住所</th><td> {{ Restaurant_detail.address }}</td> 
+            <tr><th>電話番号</th><td>{{ Restaurant_detail.phone_number }}</td>
+            <tr><th>価格帯</th><td>{{ Restaurant_detail.price_range }} </td>
+            <tr><th>カテゴリー</th><td> {{ Restaurant_detail.category }} </td>     
+    </table>     
                 
-                
+        <style>
+         table td{
+          padding: 20px 20px 20px 20px;
+           }
+
+           table{
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 750px;
+            }
+
+           table tr:last-child{
+           border-bottom:solid 1px #ddd;
+           }
+
+           table th{
+            text-align: center;
+            padding: 10px 0;
+            border-right:solid 1px #ddd;
+            border-left:solid 1px #ddd;
+            width: 200px;
+            background-color: #dadad8;
+            
+            }
+
+          table tr{
+          border-bottom: solid 1px #eee;
+          cursor: pointer;
+          }
+        </style>       
+
+<br>
+  
 
 
-            </tr>
-        </thead>
+<form >
+    <div class="hoge_button">
+    <a href="#" class="btn-gradient-radius" >♡お気に入り追加</a>
+   </div>
+    <style>
+        .hoge_button{
+         text-align: center;
+        }
+
+       .btn-gradient-radius {
+        display: inline-block;
+        text-align: center;
+        padding: 7px 20px;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #FFF;
+        background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+        transition: .4s;
+        }
+
+        .btn-gradient-radius:hover {
+        background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+
+       
+        } 
+
+       
+
         
-         <td><img src="{{ Restaurant_detail.img.url }}" style="width:100px heigth:auto;"></td>   
-         <td>{{ Restaurant_detail.name }}</td>
-         <td>{{ Restaurant_detail.business_hours }} </td>
-         <td>{{ Restaurant_detail.zip_code }} </td>
-         <td>{{ Restaurant_detail.address }} </td>
-         <td>{{ Restaurant_detail.phone_number }} </td>
-         <td>{{ Restaurant_detail.min_price }} </td>
-         <td>{{ Restaurant_detail.max_price }} </td>
-         <td>{{ Restaurant_detail.category }} </td>
-         
-         
-           
-           
-         
+    </style>
 
-      </tr>
-    
-    
-    
-   
-</table>
-<a href="{% url 'list' %}">戻る</a>
+<div style="text-align: center">
+    <a href="{% url 'list' %}">トップへ戻る</a>
+    </div>
+    {% csrf_token %}
+</form>
+
 {% endblock %}

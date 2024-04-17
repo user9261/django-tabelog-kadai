@@ -10,24 +10,24 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-warning" style="margin-bottom: 1rem;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'top' %}">NAGOYAMESHI</a>
+            <a class="navbar-brand "style="font-size: 30px;" href="{% url 'top' %}">NAGOYAMESHI</a>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     {% if request.user.is_authenticated %}
-                    <span class="navbar-text">
+                    <span class="navbar-text" style="font-size: 22px;">
                         ようこそ {{ user.get_username }} さん
                     </span>
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'top' %}">ログアウト</a>
+                        <a class="nav-link" style="font-size: 22px;" href="{% url 'top' %}">ログアウト</a>
                     </li>
                     
                     {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account' %}">新規作成</a>
+                        <a class="nav-link" style="font-size: 22px;" href="{% url 'account' %}">新規作成</a>
                      </li>
 
                     <li class="nav-item">
-                       <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                       <a class="nav-link" style="font-size: 22px;" href="{% url 'login' %}">ログイン</a>
                     </li>
                     {% endif %}
                 </ul>

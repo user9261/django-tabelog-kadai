@@ -14,8 +14,7 @@ class Restaurant(models.Model):
      zip_code = models.CharField(max_length=200)
      address = models.CharField(max_length=200,default='愛知県')
      phone_number = models.CharField(max_length=200)
-     min_price = models.PositiveIntegerField(default=0)
-     max_price = models.PositiveIntegerField(default=0)
+     price_range = models.CharField(max_length=200)
      category = models.ForeignKey(Category, on_delete=models.CASCADE)
      img = models.ImageField(blank=True, default='noImage.png')
 

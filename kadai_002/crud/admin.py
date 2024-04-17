@@ -3,7 +3,7 @@ from .models import Restaurant,Category,Subscription
 from django.utils.safestring import mark_safe
 
 class RestaurantAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'business_hours', 'zip_code', 'address', 'phone_number', 'min_price', 'max_price', 'category', 'image')
+    list_display = ('id', 'name', 'business_hours', 'zip_code', 'address', 'phone_number', 'price_range', 'category', 'image')
     search_fields = ('name',)
     list_filter = ('category',)
      

@@ -10,6 +10,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.contrib import messages
 
+
 import stripe
 from django.http import JsonResponse
 from django.views import View
@@ -36,7 +37,7 @@ class TopView(TemplateView):
 class RestaurantListView(ListView):
      model = Restaurant
      template_name = "top.html"
-     paginate_by = 3     
+      
 
 class RestaurantDetailView(DetailView):
     model = Restaurant 

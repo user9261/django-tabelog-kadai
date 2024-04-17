@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crud',
     'bootstrapform',
-    'accounts'
+    
 ]
 
 MIDDLEWARE = [
@@ -139,4 +139,3 @@ STRIPE_PUBLIC_KEY ='pk_test_51P5In4GbmPUm5RpaBUxXwjhN3d9lQNHLt53vFeQnQ62sVW0MPCS
 STRIPE_SECRET_KEY ='sk_test_51P5In4GbmPUm5RpauNIROogaGhgNyjT5GlXmjng7PybhhHIvFUMwiWtO4XpFfAX8cJnFjclluF1jcLGWeoa7zWqE003xBaNMEa'
 
 
-AUTH_USER_MODEL = "accounts.User"
