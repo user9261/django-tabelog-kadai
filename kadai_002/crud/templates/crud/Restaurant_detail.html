@@ -12,9 +12,66 @@
 <table class="table table-striped table-hover table-bordered">
     <div style="text-align: center">
     <img src="{{ Restaurant_detail.img.url }}" style="width:600px;,height:300px;">
-
    </div>
-
+   <br>
+   <script src="https://code.jquery.com/jquery.min.js"></script>
+   <script>
+   $(function() {
+       $(".btn-gradient-radius").click(function() {
+           $(this).toggleClass("click");
+       });
+   });
+   </script>
+   <div class="hoge_button">
+      <a class="btn-gradient-radius" data-text-default="♡お気に入り解除" data-text-clicked="♡お気に入りに追加済み" href="#">♡お気に入りに追加する</a>
+   </div>
+   <script>
+   $(function(){
+       $('.btn-gradient-radius').on('click', function(event){
+           event.preventDefault();
+           $(this).toggleClass('active');
+    
+           if($(this).hasClass('active')){
+               var text = $(this).data('text-clicked');
+           } else {
+               var text = $(this).data('text-default');
+           }
+    
+           $(this).html(text);
+       });
+   });
+   </script>
+        
+       <style>
+           .hoge_button{
+            text-align: center;
+           }
+   
+          .btn-gradient-radius {
+           display: inline-block;
+           text-align: center;
+           font-size: 18px;                     
+           padding: 10px 30px;
+           border-radius: 25px;
+           text-decoration: none;
+           color: #FFF;
+           background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+           transition: .4s;
+           }
+   
+           .btn-gradient-radius:hover {
+           background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+   
+          
+           } 
+   
+           .btn-gradient-radius.click{
+       background: #ff1493;
+       color: #FFF;
+   }
+    
+       </style>    
+     
 
     <table border="1">
       
@@ -24,9 +81,87 @@
             <tr><th>住所</th><td> {{ Restaurant_detail.address }}</td> 
             <tr><th>電話番号</th><td>{{ Restaurant_detail.phone_number }}</td>
             <tr><th>価格帯</th><td>{{ Restaurant_detail.price_range }} </td>
-            <tr><th>カテゴリー</th><td> {{ Restaurant_detail.category }} </td>     
-    </table>     
+            <tr><th>カテゴリー</th><td> {{ Restaurant_detail.category }} </td> 
+            <tr><th>予約する</th><td>日付を選んでください<input type="date" name="calendar" max="9999-12-31" id="birth">
+                <br> <label for="time">時間を選んでください</label>
+                <input type="time" id="time" value="" />
+                <br>人数を選んでください
+                <select name="color">
+                  <option value="1">1人</option>
+                  <option value="blue">2人</option>
+                  <option value="black">3人</option>
+                  <option value="yellow">4人</option>
+                  <option value="green">5人</option>
+                  <option value="green">6人</option>
+                </select>
+                <br>
+                <script src="https://code.jquery.com/jquery.min.js"></script>
+                <script>
+                $(function() {
+                    $(".btn").click(function() {
+                        $(this).toggleClass("click");
+                    });
+                });
+                </script>
+                <div class="hoge">
+                <a class="btn" data-text-default="キャンセルしました" data-text-clicked="予約しました" href="#">予約する</a>
+                </div>
+                <script>
+                $(function(){
+                    $('.btn').on('click', function(event){
+                        event.preventDefault();
+                        $(this).toggleClass('active');
+                 
+                        if($(this).hasClass('active')){
+                            var text = $(this).data('text-clicked');
+                        } else {
+                            var text = $(this).data('text-default');
+                        }
+                 
+                        $(this).html(text);
+                    });
+                });
+                </script>
+                     
+                    <style>
+                        
                 
+                       .btn {
+                        display: inline-block;
+                        text-align: center;
+                        
+                        padding: 7px 20px;
+                        border-radius: 10px;
+                        text-decoration: none;
+                        color: #FFF;
+                        background-image: linear-gradient(45deg, #8dd492 0%, #5fd628 100%);
+                        transition: .4s;
+                        }
+                
+                        .btn:hover {
+                        background-image: linear-gradient(45deg, #8dd492  0%, #5fd628 100%);
+                        color: #FFF;
+                
+                       
+                        } 
+                
+                        .btn.click{
+                      background: linear-gradient(45deg, #da7089  0%, #d62879 100%);
+                      color: #FFF;
+                }
+                
+                       
+                
+                        
+                    </style>
+                
+            </td>    
+            
+    </table>     
+             
+    
+
+
         <style>
          table td{
           padding: 20px 20px 20px 20px;
@@ -56,44 +191,39 @@
 
           table tr{
           border-bottom: solid 1px #eee;
-          cursor: pointer;
+          
           }
         </style>       
 
 <br>
+
+
+
+   <div style = "text-align: center;">
+    <input class="btn2" type="submit" value="レビューを投稿する" >
+    </div>
+   
   
+  <style>
+     .btn2{
+              text-align: center;
+              margin: auto;
+              font-size: 18px;                     
+              padding: 10px 30px;
+              border-radius: 25px;
+              text-decoration: none;
+              color: #FFF;
+              background-image: linear-gradient(45deg, #16d3ba 0%, #23b4e0e8 100%);
+              transition: .4s;
+              border:none;
+              cursor: pointer;
+              }
+</style>
 
+<br>
+    
+<h2>レビュー一覧</h2>
 
-<form >
-    <div class="hoge_button">
-    <a href="#" class="btn-gradient-radius" >♡お気に入り追加</a>
-   </div>
-    <style>
-        .hoge_button{
-         text-align: center;
-        }
-
-       .btn-gradient-radius {
-        display: inline-block;
-        text-align: center;
-        padding: 7px 20px;
-        border-radius: 25px;
-        text-decoration: none;
-        color: #FFF;
-        background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
-        transition: .4s;
-        }
-
-        .btn-gradient-radius:hover {
-        background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
-
-       
-        } 
-
-       
-
-        
-    </style>
 
 <div style="text-align: center">
     <a href="{% url 'list' %}">トップへ戻る</a>

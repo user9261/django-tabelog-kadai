@@ -21,17 +21,25 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 from .models import Subscription
 
-
 class TopView(TemplateView):
-     template_name = "top.html"
-     def get_context_data(self, **kwargs):
-          context = super().get_context_data(**kwargs)
-          user = self.request.user
-          if user.is_authenticated:
-               context['has_subscription'] = Subscription.objects.filter(user=user).exists()
-          else:
-               context['has_subscription'] = False
-          return context
+    template_name = "top.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+        if user.is_authenticated:
+            context['has_subscription'] = Subscription.objects.filter(user=user).exists()
+        else:
+            context['has_subscription'] = False
+        
+        # 検索クエリを取得
+        query = self.request.GET.get('search_query')
+        if query:
+            context['object_list'] = Restaurant.objects.filter(name__icontains=query)
+        else:
+            context['object_list'] = Restaurant.objects.all()
+        return context
+
+
      
      
 class RestaurantListView(ListView):

@@ -16,22 +16,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from crud import views
+from crud import views as crud_views
+from accounts import views as accounts_views
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.TopView.as_view(), name="top"),
-    path('crud/', views.RestaurantListView.as_view(), name="list"),
-    path('account', views.TopView.as_view(), name="account"),
-    path('login/', views.LoginView.as_view(), name="login"),
-    path('logout/', views.LogoutView.as_view(), name="logout"),
-    path('payment/', views.PaymentFormView.as_view(), name='payment_form'),
-    path('create-subscription/', views.CreateSubscriptionView.as_view(), name='create_subscription'),
-    path('billing-portal/', views.CustomerPortalView.as_view(), name='billing-portal'),
-    path('crud/detail/<int:pk>', views.RestaurantDetailView.as_view(), name="detail"),
-   
+    path('', crud_views.TopView.as_view(), name="top"),
+    path('crud/',crud_views.RestaurantListView.as_view(), name="list"),
+    path('account', crud_views.TopView.as_view(), name="account"),
+    path('login/', crud_views.LoginView.as_view(), name="login"),
+    path('logout/', crud_views.LogoutView.as_view(), name="logout"),
+    path('payment/', crud_views.PaymentFormView.as_view(), name='payment_form'),
+    path('create-subscription/', crud_views.CreateSubscriptionView.as_view(), name='create_subscription'),
+    path('billing-portal/', crud_views.CustomerPortalView.as_view(), name='billing-portal'),
+    path('crud/detail/<int:pk>', crud_views.RestaurantDetailView.as_view(), name="detail"),
+    path('accounts/signup/', accounts_views.SignupView.as_view(), name="signup"),
+
+
 
 ]
 
