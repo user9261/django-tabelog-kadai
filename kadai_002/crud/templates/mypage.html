@@ -6,30 +6,15 @@
 {% block content %}
  
  <h1 style="text-align:center">マイページ</h1>
-
- <div class="flexbox">
-
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">会員情報編集</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員登録</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">お気に入り一覧</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">予約一覧</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">決済情報</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員解約</div></a>
-    
-  </div>
- 
-    
- 
-<style>
-    
-    .flexbox {
-   display: flex;
-   align-items:center;
-   justify-content: center;
-   flex-wrap: wrap;
-   width: 700px;
-   height: auto;
-   margin: auto;
+ <style>
+.flexbox {
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 700px;
+  height: auto;
+  margin: auto;
 }
 
 .flex-item {
@@ -43,43 +28,40 @@
   margin: 5px;
   font-size: 24px;
   cursor: pointer;
- background-color:#f0f8ff;
- border: 1px #d3d3d3 solid;
- 
-
+  background-color:#f0f8ff;
+  border: 1px #d3d3d3 solid;
 }
-
 </style>    
+ <div class="flexbox">
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">会員情報編集</div></a>
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員登録</div></a>
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">お気に入り一覧</div></a>
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">予約一覧</div></a>
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">決済情報</div></a>
+    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員解約</div></a>
+  </div>
 <br>
-<br>
-
-    
+<br> 
+<style>
+.hoge_button{
+  text-align: center;
+  font-size: 24px;                     
+  padding: 15px 5px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: #FFF;
+  background-image: linear-gradient(45deg, #16d3ba 0%, #23b4e0e8 100%);
+  transition: .4s;
+  border:none
+}   
+</style>
 <div style = "text-align: center;">
   <a href="{% url 'top' pk=Restaurant.pk %}"><input class="hoge_button"　type="submit" value="ログアウト" id="touroku"></a>
 </div>
- 
-
-<style>
-   .hoge_button{
-            text-align: center;
-            font-size: 24px;                     
-            padding: 15px 5px;
-            border-radius: 10px;
-            text-decoration: none;
-            color: #FFF;
-            background-image: linear-gradient(45deg, #16d3ba 0%, #23b4e0e8 100%);
-            transition: .4s;
-            border:none
-            }
-     
-</style>
-
- 
 <br> 
 <br> 
-
 <div style="text-align: center">
     <a href="{% url 'list' %}">トップへ戻る</a>
 </div>
-  <br>  
+<br>  
 {% endblock %}

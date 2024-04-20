@@ -3,16 +3,8 @@
  
  {% block title %}トップ画面{% endblock %}
  {% block content %}
- <h1></h1>
-  <div class="container">
-    <img class="image" src="/media/image.png" >
-    <img class="image" src="/media/2.jpg" >
-    <img class="image" src="/media/1.jpg" >
-  </div>
-    
-
- 
-<style>
+<body>
+ <style>
 .container {
   position: relative;
   width: 1280px;
@@ -44,24 +36,14 @@
   90% { opacity: 1; }
   100% { opacity: 0; }
 }
-
-
 </style>
+<div class="container">
+  <img class="image" src="/media/image.png" >
+  <img class="image" src="/media/2.jpg" >
+  <img class="image" src="/media/1.jpg" >
+</div>
 <br>
-  <br>
-  
-
-<body>
-
-<h1 style="text-align:center">店舗検索</h1>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<form id="form1" action="http://127.0.0.1:8000/" method="get">
-<input id="sbox2" name="search_query" type="text" placeholder="店舗名・キーワードを入力" />
-  <button id="sbtn2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-</form>
-
-  
+<br>
 <style>  
 /*フォーム全体を中央へ*/
 #form1{
@@ -92,18 +74,38 @@
 #sbtn2:hover{
 background: #92dbff;/
 }
+  </style>
+   <h1 style="text-align:center">店舗検索</h1>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+     <form id="form1" action="http://127.0.0.1:8000/" method="get">
+       <input id="sbox2" name="search_query" type="text" placeholder="店舗名・キーワードを入力" />
+       <button id="sbtn2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+     </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <style>
+.hoge_button{
+  text-align: center;
+}
+
+.btn-gradient-radius {
+  display: inline-block;
+  text-align: center;
+  padding: 7px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  color: #FFF;
+  background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  transition: .4s;
+}
+
+.btn-gradient-radius:hover {
+  background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
+}     
 </style>
-
-
-
-  <br>
-  <br>
-  <br>
-  <br>
-
-          
-        <h2 style="text-align:center">カテゴリーで検索</h2>
-      
+   <h2 style="text-align:center">カテゴリーで検索</h2>
       <div class="hoge_button">
         <a href="#" class="btn-gradient-radius" >居酒屋</a>
         <a href="#" class="btn-gradient-radius" >焼肉</a>
@@ -111,35 +113,25 @@ background: #92dbff;/
         <a href="#" class="btn-gradient-radius" >そば</a>
         <a href="#" class="btn-gradient-radius" >ラーメン</a>
         <a href="#" class="btn-gradient-radius" >和食</a>
-        
-       </div>
-        <style>
-            .hoge_button{
-             text-align: center;
-            }
-    
-           .btn-gradient-radius {
-            display: inline-block;
-            text-align: center;
-            padding: 7px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            color: #FFF;
-            background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
-            transition: .4s;
-            }
-    
-            .btn-gradient-radius:hover {
-            background-image: linear-gradient(45deg, #FFC107 0%, #f76a35 100%);
-            }  
-    
-            
-        </style>
+    </div>      
 <br>
 <br>
+<style>
+.flex{
+  display:inline-block;
+  text-align: center;
+}
+
+.class{
+  text-align: center;
+  justify-content: center;
+  display:inline-block;
+  flex-wrap: wrap;
+  margin-left: 7px;
+} 
+</style>
 <div class="flex">
-<h1>店舗一覧</h1> 
-    
+   <h1>店舗一覧</h1> 
       {% for Restaurant in object_list %}
       <div class="class"> 
         <table border="1"> 
@@ -148,38 +140,7 @@ background: #92dbff;/
        </table >
       </div>
     </div>
-      
-
-    
- 
-     
-       <style>
-       .flex{
-        display:inline-block;
-        text-align: center;
-       
-               
-        
-        }
-       
-        .class{
-          text-align: center;
-          justify-content: center;
-          display:inline-block;
-          flex-wrap: wrap;
-          margin-left: 7px;
-
-        }
-       
-       
-
-       </style>
-
-  
       {% endfor %}
-
 </body>
  
-
-
- {% endblock %}
+{% endblock %}
