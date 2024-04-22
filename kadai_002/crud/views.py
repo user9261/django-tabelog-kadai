@@ -119,3 +119,8 @@ class CustomerPortalView(LoginRequiredMixin, View):
         # 顧客ポータルのURLへリダイレクト
         return HttpResponseRedirect(session.url)
 
+class ReviewFormView(TemplateView):
+     template_name = 'crud/review_form.html'
+
+class MypageView(TemplateView):
+     template_name = 'mypage.html'

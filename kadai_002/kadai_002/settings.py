@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crud',
     'bootstrapform',
-    'accounts'
+    'accounts',
+    'widget_tweaks',
     
 ]
 

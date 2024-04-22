@@ -19,7 +19,6 @@ class Restaurant(models.Model):
      price_range = models.CharField(max_length=200)
      category = models.ForeignKey(Category, on_delete=models.CASCADE)
      img = models.ImageField(blank=True, default='noImage.png')
-
      def __str__(self):
         return self.name
     

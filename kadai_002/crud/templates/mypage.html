@@ -33,12 +33,12 @@
 }
 </style>    
  <div class="flexbox">
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">会員情報編集</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員登録</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">お気に入り一覧</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">予約一覧</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">決済情報</div></a>
-    <a href="{% url 'top' pk=Restaurant.pk %}"><div class="flex-item">有料会員解約</div></a>
+    <a href="{% url 'list' %}"><div class="flex-item">会員情報編集</div></a>
+    <a href="{% url 'list' %}"><div class="flex-item">有料会員登録</div></a>
+    <a href="{% url 'list' %}"><div class="flex-item">お気に入り一覧</div></a>
+    <a href="{% url 'list' %}"><div class="flex-item">予約一覧</div></a>
+    <a href="{% url 'payment_form' %}"><div class="flex-item">決済情報</div></a>
+    <a href="{% url 'list' %}"><div class="flex-item">有料会員解約</div></a>
   </div>
 <br>
 <br> 
@@ -56,7 +56,7 @@
 }   
 </style>
 <div style = "text-align: center;">
-  <a href="{% url 'top' pk=Restaurant.pk %}"><input class="hoge_button"　type="submit" value="ログアウト" id="touroku"></a>
+  <a href="{% url  'list' %}"><input class="hoge_button"　type="submit" value="ログアウト" id="touroku"></a>
 </div>
 <br> 
 <br> 
