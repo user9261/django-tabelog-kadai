@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Restaurant
+from .models import Restaurant, Favorite, Reservation
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.contrib import messages
 
 
@@ -48,9 +48,28 @@ class RestaurantListView(ListView):
       
 
 class RestaurantDetailView(DetailView):
-    model = Restaurant 
-    context_object_name = "Restaurant_detail"
+    model = Restaurant
     template_name = "crud/Restaurant_detail.html"
+    context_object_name = 'restaurant'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        restaurant = context['restaurant']
+        user = self.request.user
+        if user.is_authenticated:
+            context['is_favorite'] = Favorite.objects.filter(user=user, restaurant=restaurant).exists()
+            # 予約の存在チェックを追加
+            context['has_reservation'] = Reservation.objects.filter(user=user, restaurant=restaurant).exists()
+
+            if context['has_reservation']:
+                context['url'] = "cancel_reservation"
+            else:
+                context['url'] = "create_reservation"
+        else:
+            context['is_favorite'] = False
+            context['has_reservation'] = False
+        return context
+
 
 
       
@@ -118,6 +137,48 @@ class CustomerPortalView(LoginRequiredMixin, View):
 
         # 顧客ポータルのURLへリダイレクト
         return HttpResponseRedirect(session.url)
+    
+class ToggleFavoriteView(LoginRequiredMixin, View):
+    def post(self, request, restaurant_id):
+        restaurant = get_object_or_404(Restaurant, id=restaurant_id)
+        favorite, created = Favorite.objects.get_or_create(user=request.user, restaurant=restaurant)
+
+        if not created:
+            favorite.delete()
+        else:
+            favorite.save()
+
+        return redirect('restaurant_detail', pk=restaurant.id)
+class CreateReservationView(LoginRequiredMixin, View):
+    def post(self, request, restaurant_id):
+        user = request.user
+        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+        reservation_date = request.POST.get('reservation_date')
+        reservation_time = request.POST.get('reservation_time')
+        number_of_people = request.POST.get('number_of_people')
+
+        reservation = Reservation(
+            user=user,
+            restaurant=restaurant,
+            reservation_date=reservation_date,
+            reservation_time=reservation_time,
+            number_of_people=number_of_people
+        )
+        reservation.save()
+
+        messages.success(request, "予約が完了しました。")
+        return redirect('restaurant_detail', pk=restaurant.id)
+    
+class CancelReservationView(LoginRequiredMixin, View):
+    def post(self, request, restaurant_id):
+        user = request.user
+        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+        reservation = Reservation.objects.filter(user=user, restaurant=restaurant)
+        reservation.delete()
+
+        messages.success(request, "予約をキャンセルしました。")
+        return redirect('restaurant_detail', pk=restaurant.id)
+
 
 class ReviewFormView(TemplateView):
      template_name = 'crud/review_form.html'

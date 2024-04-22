@@ -19,8 +19,12 @@
                         <a class="nav-link" style="font-size: 22px;" href="{% url 'mypage' %}">マイページ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="font-size: 22px;" href="{% url 'top' %}">ログアウト</a>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link" style="font-size: 22px; padding: 0; border: none; background: none;">ログアウト</button>
+                        </form>
                     </li>
+
                     
                     {% else %}
                     <li class="nav-item">
