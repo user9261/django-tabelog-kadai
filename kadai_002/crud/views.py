@@ -38,7 +38,15 @@ class TopView(TemplateView):
         else:
             context['object_list'] = Restaurant.objects.all()
         return context
+    
 
+        # カテゴリーを取得
+        category = self.request.GET.get('search_category')
+        if category:
+            context['object_list'] = Restaurant.objects.filter(name__icontains=category)
+        else:
+            context['object_list'] = Restaurant.objects.all()
+        return context
 
      
      
@@ -149,6 +157,7 @@ class ToggleFavoriteView(LoginRequiredMixin, View):
             favorite.save()
 
         return redirect('restaurant_detail', pk=restaurant.id)
+    
 class CreateReservationView(LoginRequiredMixin, View):
     def post(self, request, restaurant_id):
         user = request.user
@@ -180,7 +189,7 @@ class CancelReservationView(LoginRequiredMixin, View):
         return redirect('restaurant_detail', pk=restaurant.id)
 
 
-class ReviewFormView(TemplateView):
+class ReviewView(TemplateView):
      template_name = 'crud/review_form.html'
 
 class MypageView(TemplateView):
