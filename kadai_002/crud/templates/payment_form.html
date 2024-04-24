@@ -3,13 +3,14 @@
 {% block title %}Payment Form{% endblock %}
 
 {% block content %}
-<h2>Payment Form</h2>
+<h2 style="text-align:center">Payment Form</h2>
+<div class="d-flex justify-content-center">
 <form id="payment-form" method="post" action="{% url 'create_subscription' %}">
     {% csrf_token %}
     <div id="card-element">
         <!-- StripeのカードElementがここに挿入されます -->
     </div>
-    <button type="submit" id="submit-button">Submit Payment</button>
+    <button type="submit" id="submit-button" class="btn btn-primary">Submit Payment</button>
     <div id="card-errors" role="alert"></div>
 </form>
 
@@ -72,6 +73,7 @@ function stripeTokenHandler(token) {
     form.submit();
 }
 </script>
+</div>
 {% endblock %}
 
 

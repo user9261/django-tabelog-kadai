@@ -46,7 +46,7 @@
 .hoge_button{
   text-align: center;
   font-size: 24px;                     
-  padding: 15px 5px;
+  padding: 15px 50px;
   border-radius: 10px;
   text-decoration: none;
   color: #FFF;
@@ -55,9 +55,11 @@
   border:none
 }   
 </style>
-<div style = "text-align: center;">
-  <a href="{% url  'list' %}"><input class="hoge_button"　type="submit" value="ログアウト" id="touroku"></a>
-</div>
+
+<form action="{% url 'logout' %}" method="post" style = "text-align: center;">
+  {% csrf_token %}
+  <button type="submit" class="hoge_button" >ログアウト</button>
+</form>
 <br> 
 <br> 
 <div style="text-align: center">

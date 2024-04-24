@@ -35,18 +35,19 @@ class TopView(TemplateView):
         query = self.request.GET.get('search_query')
         if query:
             context['object_list'] = Restaurant.objects.filter(name__icontains=query)
+            return context
         else:
             context['object_list'] = Restaurant.objects.all()
-        return context
-    
-
+        
         # カテゴリーを取得
         category = self.request.GET.get('search_category')
         if category:
-            context['object_list'] = Restaurant.objects.filter(name__icontains=category)
+            context['object_list'] = Restaurant.objects.filter(category__name__icontains=category)
         else:
             context['object_list'] = Restaurant.objects.all()
+
         return context
+
 
      
      
