@@ -56,7 +56,7 @@ class RestaurantListView(ListView):
      template_name = "top.html"
       
 
-class RestaurantDetailView(DetailView):
+class RestaurantDetailView(LoginRequiredMixin, DetailView):
     model = Restaurant
     template_name = "crud/Restaurant_detail.html"
     context_object_name = 'restaurant'
@@ -78,6 +78,8 @@ class RestaurantDetailView(DetailView):
             context['is_favorite'] = False
             context['has_reservation'] = False
         return context
+
+
 
 
 
@@ -191,7 +193,16 @@ class CancelReservationView(LoginRequiredMixin, View):
 
 
 class ReviewView(TemplateView):
-     template_name = 'crud/review_form.html'
+    template_name = 'crud/review_form.html'
+    def post(self, request, restaurant_id):
+        user = request.user
+        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+
+        
+
+        return redirect('restaurant_detail', pk=restaurant.id)
+     
+
 
 class MypageView(TemplateView):
      template_name = 'mypage.html'

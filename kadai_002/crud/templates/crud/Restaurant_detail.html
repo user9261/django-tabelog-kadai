@@ -13,10 +13,10 @@
 {% endif %}
 
 <h1>店舗詳細</h1>
-  <h2 style="text-align: center">{{ Restaurant_detail.name }}</h2>
+  <h2 style="text-align: center">{{ restaurant.name }}</h2>
    <table class="table table-striped table-hover table-bordered">
     <div style="text-align: center">
-    <img src="{{ Restaurant_detail.img.url }}" style="width:600px;,height:300px;">
+    <img src="{{ restaurant.img.url }}" style="width:600px;,height:300px;">
    </div>
   </table>
 <br>
@@ -195,11 +195,11 @@ table tr{
 <h2>レビュー一覧</h2>
 
 
-
+{% csrf_token %}
 <div style="text-align: center">
-    <a href="{% url 'list' %}">トップへ戻る</a>
+    <a href="{% url 'top' %}">トップへ戻る</a>
 </div>
-    {% csrf_token %}
-</form>
+    
+
 
 {% endblock %}

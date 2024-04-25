@@ -131,16 +131,16 @@ background: #92dbff;/
   margin-left: 7px;
 } 
 </style>
-<div class="flex">
-   <h1>店舗一覧</h1> 
+<h1>店舗一覧</h1> 
+  <div class="flex">
       {% for Restaurant in object_list %}
-      <div class="class"> 
+    <div class="class"> 
         <table border="1"> 
           <tr><td>{{ Restaurant.name }}</td></tr>
           <td ><a href="{% url 'detail' pk=Restaurant.pk %}"><img src="{{ Restaurant.img.url }}" style="width:100px height:auto;"></a></td>          
        </table >
-      </div>
     </div>
+  </div>
       {% endfor %}
 </body>
  
