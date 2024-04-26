@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.conf import settings
 from django.views.generic import TemplateView, ListView, DetailView
-from .models import Restaurant, Favorite, Reservation
+from .models import Restaurant, Favorite, Reservation,Review
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import AuthenticationForm
@@ -193,15 +193,25 @@ class CancelReservationView(LoginRequiredMixin, View):
 
 
 class ReviewView(TemplateView):
-    template_name = 'crud/review_form.html'
+    template_name = "crud/review_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        restaurant_id = self.kwargs.get("restaurant_id")
+        context["restaurant"] = get_object_or_404(Restaurant, pk=restaurant_id)
+        return context
+
     def post(self, request, restaurant_id):
         user = request.user
         restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
+        score = request.POST.get("score", 0)
+        comment = request.POST.get("comment", "")
+        review = Review(user=user, restaurant=restaurant, score=score, content=comment)
+        review.save()
 
-        
+        messages.success(request, "投稿しました。")
+        return redirect("restaurant_detail", pk=restaurant.id)
 
-        return redirect('restaurant_detail', pk=restaurant.id)
-     
 
 
 class MypageView(TemplateView):

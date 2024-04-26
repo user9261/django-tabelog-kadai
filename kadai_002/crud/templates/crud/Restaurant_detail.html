@@ -188,11 +188,12 @@ table tr{
 <br>
 
 <div style = "text-align: center;">
-   <a href="{% url 'review_form' %}" class="btn2">レビューを投稿する</a>
+  <a href="{% url 'review_form' restaurant.id %}" class="btn2">レビューを投稿する</a>
 </div>
  
     
 <h2>レビュー一覧</h2>
+
 
 
 {% csrf_token %}
