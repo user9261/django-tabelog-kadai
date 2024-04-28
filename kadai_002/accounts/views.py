@@ -6,6 +6,14 @@ from django.contrib.auth import login, authenticate
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .forms import SignUpForm
+from django.views.generic.edit import UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from .models import User
+from .forms import UserEditForm
+
+
+
+
 
 
 class SignupView(CreateView):
@@ -22,3 +30,19 @@ class SignupView(CreateView):
         user = authenticate(account_id=account_id, password=password)
         login(self.request, user)
         return response
+
+
+class EditUserView(LoginRequiredMixin, UpdateView):
+    model = User
+    form_class = UserEditForm
+    template_name = 'accounts/edit_user.html'
+    success_url = reverse_lazy('top')
+
+    def get_object(self):
+        return self.request.user
+    
+    def form_valid(self, form):
+        # フォームのデータを保存する
+        user = form.save(commit=False)
+        user.save()
+        return super().form_valid(form)

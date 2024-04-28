@@ -193,6 +193,27 @@ table tr{
  
     
 <h2>レビュー一覧</h2>
+{% if reviews %}
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <strong>{{ review.user.username }}</strong> - {{ review.score }}/5
+        <p>{{ review.content }}</p>
+        {% if review.user == request.user %}
+        <div style = "display: flex;">
+            <a href="{% url 'edit_review' review.id %}" style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">編集</a>
+          <form action="{% url 'delete_review' review.id %}" method="post" onsubmit="return confirm('本当に削除しますか？');">
+            {% csrf_token %}
+            <button type="submit" style="border: none; background: none; color: blue; text-decoration: underline; cursor: pointer;">削除</button>
+          </form>
+        </div>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>この店舗にはまだレビューがありません。</p>
+{% endif %}
 
 
 

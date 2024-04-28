@@ -32,14 +32,16 @@
   border: 1px #d3d3d3 solid;
 }
 </style>    
- <div class="flexbox">
-    <a href="{% url 'list' %}"><div class="flex-item">会員情報編集</div></a>
-    <a href="{% url 'list' %}"><div class="flex-item">有料会員登録</div></a>
-    <a href="{% url 'list' %}"><div class="flex-item">お気に入り一覧</div></a>
-    <a href="{% url 'list' %}"><div class="flex-item">予約一覧</div></a>
-    <a href="{% url 'payment_form' %}"><div class="flex-item">決済情報</div></a>
-    <a href="{% url 'list' %}"><div class="flex-item">有料会員解約</div></a>
-  </div>
+<div class="flexbox">
+  <a href="{% url 'edit_user' %}"><div class="flex-item">会員情報編集</div></a>
+  <a href="{% url 'payment_form' %}"><div class="flex-item">有料会員登録</div></a>
+  {% if has_subscription %}
+    <a href="{% url 'favorites_list' %}"><div class="flex-item">お気に入り一覧</div></a>
+    <a href="{% url 'reservations_list' %}"><div class="flex-item">予約一覧</div></a>
+    <button onclick="confirmCancellation()" class="flex-item">有料会員解約</button>
+    <a href="{% url 'billing-portal' %}"><div class="flex-item">決済情報</div></a>
+  {% endif %}
+</div>
 <br>
 <br> 
 <style>
@@ -66,4 +68,14 @@
     <a href="{% url 'top' %}">トップへ戻る</a>
 </div>
 <br>  
+
+<script>
+  function confirmCancellation() {
+    if (confirm('本当に解約しますか？')) {
+        // ユーザーが「OK」をクリックした場合、解約処理のURLにリダイレクト
+        window.location.href = "{% url 'cancel_subscription' %}";
+    }
+  }
+  </script>
+  
 {% endblock %}

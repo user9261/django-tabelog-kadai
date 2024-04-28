@@ -39,8 +39,16 @@ urlpatterns = [
     path('restaurant/<int:pk>/', crud_views.RestaurantDetailView.as_view(), name='restaurant_detail'),
     path('restaurant/<int:restaurant_id>/reserve/', crud_views.CreateReservationView.as_view(), name='create_reservation'),
     path('restaurant/<int:restaurant_id>/cancel/', crud_views.CancelReservationView.as_view(), name='cancel_reservation'),
-    
-    
+
+    path('review/edit/<int:review_id>/', crud_views.EditReviewView.as_view(), name='edit_review'),
+    path('restaurant/<int:restaurant_id>/reserve/', crud_views.UpdateReviewView.as_view(), name='update_review'),
+
+    path('review/delete/<int:review_id>/', crud_views.DeleteReviewView.as_view(), name='delete_review'),
+    path('accounts/edit/', accounts_views.EditUserView.as_view(), name='edit_user'),
+    path('cancel-subscription/', crud_views.CancelSubscriptionView.as_view(), name='cancel_subscription'),
+    path('favorites/', crud_views.FavoritesListView.as_view(), name='favorites_list'),
+    path('reservations/', crud_views.ReservationsListView.as_view(), name='reservations_list'),
+
 
 
 
