@@ -306,25 +306,23 @@ class ReservationsListView(ListView):
 
 class EditReviewView(ListView):
     model = Review
-    template_name = "crud/edit_review.html"
-    
-        
-    
+    template_name = 'crud/edit_review.html'
 
-class UpdateReviewView(LoginRequiredMixin, View):
-    def post(self, request, restaurant_id):
-
-       
-
+    def post(self, request, review_id):
         user = request.user
-        restaurant = get_object_or_404(Restaurant, pk=restaurant_id)
-        
-        reservation = Reservation(
-            user=user,
-            restaurant=restaurant,
-            
-        )
-        reservation.save()
+        if not Subscription.objects.filter(user=user).exists():
+            messages.success(request, "有料会員になる必要があります。")
+            return redirect("payment_form")
 
-        messages.success(request, "更新が完了しました。")
-        return redirect('restaurant_detail', pk=restaurant.id)  
+        review = get_object_or_404(Review, pk=review_id)
+        score = request.POST.get("score")
+        content = request.POST.get("content")
+        review.score = score
+        review.content = content
+        review.save()
+        return redirect("top")
+
+    
+        
+    
+
