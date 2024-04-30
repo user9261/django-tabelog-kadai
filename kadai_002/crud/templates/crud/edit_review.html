@@ -111,7 +111,7 @@ table th{
   <tr>
     <th>評価:</th>
     <td>
-      <form class="edit_review" action="" method="POST">
+      <form class="review-form" action="" method="POST">
         {% csrf_token %}
         <input type="hidden" name="score" value="{{ review.score }}">
         <div class="evaluation">
@@ -128,7 +128,7 @@ table th{
         </div>
         <br>
         <label for="comment">コメント:</label>
-        <input type="text" class="txt2" id="content" name="content">
+        <input type="text" class="txt2" id="content" name="content" value="{{ review.content }}">
           <div style = "text-align: center;">
            <input class="hoge_button" type="submit" value="更新する">
          </div>      

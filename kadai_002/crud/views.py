@@ -304,17 +304,18 @@ class ReservationsListView(ListView):
         return Reservation.objects.filter(user=self.request.user)
 
 
-class EditReviewView(ListView):
+class EditReviewView(DetailView):
     model = Review
     template_name = 'crud/edit_review.html'
+    pk_url_kwarg = 'review_id'
 
-    def post(self, request, review_id):
+    def post(self, request, *args, **kwargs):
         user = request.user
         if not Subscription.objects.filter(user=user).exists():
             messages.success(request, "有料会員になる必要があります。")
             return redirect("payment_form")
 
-        review = get_object_or_404(Review, pk=review_id)
+        review = self.get_object()
         score = request.POST.get("score")
         content = request.POST.get("content")
         review.score = score
@@ -322,6 +323,10 @@ class EditReviewView(ListView):
         review.save()
         return redirect("top")
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['review'] = self.get_object()
+        return context
     
         
     
