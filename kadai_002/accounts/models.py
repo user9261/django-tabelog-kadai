@@ -44,8 +44,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
 
-    USERNAME_FIELD = 'account_id'
-    REQUIRED_FIELDS = ['email']
+    # accounts/models.py
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
 
     @property
     def username(self):

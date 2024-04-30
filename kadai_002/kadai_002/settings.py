@@ -41,8 +41,34 @@ INSTALLED_APPS = [
     'bootstrapform',
     'accounts',
     'widget_tweaks',
-    
+    # メール認証
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
 ]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1
+
+# メールでの確認を必須にする
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+ACCOUNT_LOGIN_ATTEMPTS_LIMIT = 5
+ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 300  # Seconds
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_UNIQUE_EMAIL = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -52,6 +78,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+
 ]
 
 ROOT_URLCONF = 'kadai_002.urls'
@@ -142,3 +170,7 @@ STRIPE_PUBLIC_KEY ='pk_test_51P5In4GbmPUm5RpaBUxXwjhN3d9lQNHLt53vFeQnQ62sVW0MPCS
 STRIPE_SECRET_KEY ='sk_test_51P5In4GbmPUm5RpauNIROogaGhgNyjT5GlXmjng7PybhhHIvFUMwiWtO4XpFfAX8cJnFjclluF1jcLGWeoa7zWqE003xBaNMEa'
 
 AUTH_USER_MODEL = 'accounts.User'
+
+ACCOUNT_FORMS = {
+  'signup': 'accounts.forms.CustomSignupForm'
+}
