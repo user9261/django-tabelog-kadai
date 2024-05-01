@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load bootstrap %}
+
+{% block title %}ログイン{% endblock %}
+{% block content %}
+ <h1 style="text-align:center">ログイン</h1>
+ <div class="d-flex justify-content-center">
+   <form method="post">
+    {% csrf_token %}
+    {{ form|bootstrap }}
+     <br>
+    <input type="submit" class="btn btn-warning" value="ログイン">
+   </form>
+ </div>
+ {% if not request.user.is_authenticated %}
+ <a href="{% url 'password_reset' %}">パスワードをお忘れですか？</a>
+{% endif %}
+
+{% endblock %}
