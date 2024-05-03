@@ -111,10 +111,10 @@ WSGI_APPLICATION = 'kadai_002.wsgi.application'
 DATABASES = {
     'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
-                'NAME': '',
-                'USER': '',
-                'PASSWORD': '',
-                'HOST': '',
+                'NAME': 'd19odmaqag0nkl',
+                'USER': 'qmognkrrkmrads',
+                'PASSWORD': 'b72b3d0a1c26f7015d7bef521f0ba8323c95bb2e59f7d2e481b38c6989073f87',
+                'HOST': 'ec2-52-72-109-141.compute-1.amazonaws.com',
                 'PORT': '5432',
                 }
 }
