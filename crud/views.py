@@ -151,7 +151,7 @@ class CustomerPortalView(LoginRequiredMixin, View):
             # 顧客ポータルセッションの作成
             session = stripe.billing_portal.Session.create(
                 customer=customer_id,
-                return_url="http://127.0.0.1:8000/",
+                return_url="https://test052214-27c4362284fb.herokuapp.com/",
             )
 
             # 顧客ポータルのURLへリダイレクト
