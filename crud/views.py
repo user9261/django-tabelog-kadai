@@ -321,7 +321,9 @@ class EditReviewView(DetailView):
         review.score = score
         review.content = content
         review.save()
-        return redirect("top")
+        # レビューに紐づくレストランの詳細ページにリダイレクト
+        restaurant_id = review.restaurant.id
+        return redirect('restaurant_detail', pk=restaurant_id)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
