@@ -24,6 +24,11 @@
 
 <script src="https://code.jquery.com/jquery.min.js"></script>
   <script>
+    document.addEventListener('DOMContentLoaded', function(){
+    var today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').setAttribute('min', today);
+  });
+
     function validateTime() {
     var input = document.getElementById('time');
     var time = input.value;
@@ -160,7 +165,7 @@ table tr{
       <th>予約する</th>
       <td>
         {% if not has_reservation %}
-          日付を選んでください<input type="date" name="reservation_date" max="9999-12-31" id="birth">
+          日付を選んでください<input type="date" id="date" name="reservation_date" max="9999-12-31">
           <br> <label for="time">時間を選んでください</label>
           <input type="time" id="time" name="reservation_time" min="{{ restaurant.start_time }}" max="{{ restaurant.end_time }}" value="" oninput="validateTime()"/>
           <br>人数を選んでください
